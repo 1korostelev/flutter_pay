@@ -29,7 +29,7 @@ class FlutterPayPlugin : FlutterPlugin, MethodCallHandler, PluginRegistry.Activi
     private var lastResult: Result? = null
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        val channel = MethodChannel(flutterPluginBinding.binaryMessenger, "flutter_pay")
+        val channel = MethodChannel(flutterPluginBinding.binaryMessenger, "flutter_simple_pay")
         channel.setMethodCallHandler(this)
     }
 
@@ -44,7 +44,7 @@ class FlutterPayPlugin : FlutterPlugin, MethodCallHandler, PluginRegistry.Activi
     companion object {
         @JvmStatic
         fun registerWith(registrar: Registrar) {
-            val channel = MethodChannel(registrar.messenger(), "flutter_pay")
+            val channel = MethodChannel(registrar.messenger(), "flutter_simple_pay")
             val plugin = FlutterPayPlugin()
             channel.setMethodCallHandler(plugin)
             registrar.addActivityResultListener(plugin)
