@@ -1,7 +1,7 @@
 part of flutter_pay;
 
 class FlutterPay {
-  final MethodChannel _channel = MethodChannel('flutter_pay');
+  final MethodChannel _channel = MethodChannel('flutter_simple_pay');
 
   /// Switch Google Pay [environment]
   ///

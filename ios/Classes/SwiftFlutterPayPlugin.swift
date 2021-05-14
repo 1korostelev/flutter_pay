@@ -8,7 +8,7 @@ public class SwiftFlutterPayPlugin: NSObject, FlutterPlugin {
     let paymentAuthorizationController = PKPaymentAuthorizationController()
     
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "flutter_pay", binaryMessenger: registrar.messenger())
+    let channel = FlutterMethodChannel(name: "flutter_simple_pay", binaryMessenger: registrar.messenger())
     let instance = SwiftFlutterPayPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
