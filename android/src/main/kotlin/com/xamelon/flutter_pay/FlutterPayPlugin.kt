@@ -6,6 +6,7 @@ import androidx.annotation.NonNull
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.wallet.*
 import io.flutter.embedding.engine.plugins.FlutterPlugin
+import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.MethodCall
@@ -20,8 +21,9 @@ import org.json.JSONObject
 /** FlutterPayPlugin */
 class FlutterPayPlugin : FlutterPlugin, MethodCallHandler, PluginRegistry.ActivityResultListener, ActivityAware {
 
-    private lateinit var googlePayClient: PaymentsClient
-    private lateinit var activity: Activity
+    private var googlePayClient: PaymentsClient? = null
+    private var binding: ActivityPluginBinding? = null
+    private var activity: FlutterFragmentActivity? = null
     private var environment = WalletConstants.ENVIRONMENT_PRODUCTION
 
     private val LOAD_PAYMENT_DATA_REQUEST_CODE = 991
@@ -326,7 +328,8 @@ class FlutterPayPlugin : FlutterPlugin, MethodCallHandler, PluginRegistry.Activi
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
-        this.activity = binding.activity
+        this.activity = binding.activity as? FlutterFragmentActivity
+        this.binding = binding
         binding.addActivityResultListener(this)
         createPaymentsClient()
     }
