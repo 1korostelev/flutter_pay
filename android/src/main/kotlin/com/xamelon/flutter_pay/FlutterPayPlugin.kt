@@ -329,9 +329,19 @@ class FlutterPayPlugin : FlutterPlugin, MethodCallHandler, PluginRegistry.Activi
         createPaymentsClient()
     }
 
-    override fun onDetachedFromActivity() {}
 
-    override fun onDetachedFromActivityForConfigChanges() {}
+    override fun onDetachedFromActivity() {
+        this.activity = null
+        this.googlePayClient = null
+        binding?.removeActivityResultListener(this)
+        binding = null
+    }
+
+    override fun onDetachedFromActivityForConfigChanges() {
+        this.activity = null
+        binding?.removeActivityResultListener(this)
+        binding = null
+    }
 
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
         this.activity = binding.activity
